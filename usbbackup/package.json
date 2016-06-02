@@ -1,0 +1,10 @@
+{
+  "name": "usbbackup",
+  "version": "0.0.0",
+  "description": "usbbackup",
+  "main": "app.js",
+  "author": {
+    "name": "Giacomo",
+    "email": ""
+  }
+}
