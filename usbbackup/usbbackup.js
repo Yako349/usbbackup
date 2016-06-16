@@ -25,7 +25,7 @@ rl.question('Which drive do you wanna backup? (ONLY LETTER, not case-sensitive) 
         var given = answer + '://';
         console.log(given);
     });
-    setTimeout(putIn, 4000, rl);
+    setTimeout(putIn, 5000, rl);
 });
 
 function putIn(rl) {
@@ -35,17 +35,19 @@ function putIn(rl) {
         given = given.toUpperCase();
         console.log('this may take a while...');
         fs.readdir(given, (err, list) => {
+            console.log("looking for 'backups' folder (if not found will be created, don't worry)"); 
             if (err) {
                 console.log(err);
             } else {
                 for (var i in list) {
                     if (list[i] == 'backups') {
                         ok = true;
-                        console.log("'backup' folder found");
+                        console.log("'backups' folder found!");
                     }
                 }
                 if (!ok) {
                     fs.mkdirSync(given + '\\backups');
+                    console.log("'backups' folder created");
                 }
             }
         });
@@ -55,12 +57,13 @@ function putIn(rl) {
             if (err) {
                 console.log(err);
             } else {
-                console.log('entering');
+                console.log('zipping files');
                 zipFold.writeToFile(given + '/backups/' + oggi + '.zip');
                 console.log('saved as ' + oggi + '.zip');
+                rl.close();
             }
         });
-        
+   
     });
-    rl.close();
+    
 }	
